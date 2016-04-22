@@ -62,5 +62,5 @@ target/
 .ipynb_checkpoints
 
 # Simulation files
-.traj
-.xyz
+*.traj
+*.xyz
