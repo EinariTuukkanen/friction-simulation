@@ -965,22 +965,6 @@ class FrictionSimulation:
         filing = add_number_to_filename(filename, self._get_step(), addStepNumber)
         write_file(filing, output_lines)
 
-    def get_avg_force(self,indices):
-        """Averige forces of indices
-        """
-        sum_forces = [0,0,0]
-        for index in indices:
-          try:
-            force = self.system[index].force
-          except: 
-            force =[0.0, 0.0, 0.0]
-          sum_force = [sum_force[i]]+ veloc[i] for i in range(0,3)]
-        return [sum_velocity[i]] / len(indices) for i in range(0,3)]
-
-
-
-
-
     def get_avg_velocity(self, indices):
         """ Average velocity of indices
         """
