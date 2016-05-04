@@ -96,8 +96,8 @@ def main(fixed_strength):
     # fixed_slab_z = 2  # 2
 
     element_lj_strengths = {
-        'Au': 1.0,
-        'Ag': fixed_strength
+        'Au': fixed_strength,
+        'Ag': 1.0
     }
 
     # Create simulation object
@@ -169,14 +169,14 @@ def main(fixed_strength):
         xdiff.append(xpos1[i] - xpos0[i])
     xdiffavg = sum(xdiff) / len(xdiff)
 
-    out = open('dataout.txt', 'a')
+    out = open('dataout_fixed_slab.txt', 'a')
     out.write('\n{0}    {1}     {2}'.format(fixed_strength, numpy.mean(xdiff), numpy.var(xdiff)))
     out.close()
 
-    out2 = open('dataout_{0}.txt'.format(fixed_strength), 'a')
-    for i in range(0, len(xdiff)):
-        out2.write('\n{0}'.format(xdiff[i]))
-    out2.close()
+    #out2 = open('dataout_{0}.txt'.format(fixed_strength), 'a')
+    #for i in range(0, len(xdiff)):
+    #    out2.write('\n{0}'.format(xdiff[i]))
+    #out2.close()
 
     print(xpos0, xpos1)
 
@@ -190,7 +190,7 @@ def main(fixed_strength):
 import time
 
 
-allx = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0]
+allx = [0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.425, 0.45, 0.475, 0.5, 0.525, 0.55, 0.575, 0.6, 0.625, 0.65, 0.675, 0.7, 0.725, 0.75, 0.775, 0.8, 0.825, 0.85, 0.9, 0.95, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0]
 
 for s in allx:
     print('running with str '+str(s))
