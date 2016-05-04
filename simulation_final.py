@@ -2,6 +2,7 @@
 
 import math
 
+import numpy
 import pysic
 import friction_tools as ft
 
@@ -169,8 +170,13 @@ def main(fixed_strength):
     xdiffavg = sum(xdiff) / len(xdiff)
 
     out = open('dataout.txt', 'a')
-    out.write('\n{0}    {1}'.format(fixed_strength, xdiffavg))
+    out.write('\n{0}    {1}     {2}'.format(fixed_strength, numpy.mean(xdiff), numpy.var(xdiff)))
     out.close()
+
+    out2 = open('dataout_{0}.txt'.format(fixed_strength), 'a')
+    for i in range(0, len(xdiff)):
+        out2.write('\n{0}'.format(xdiff[i]))
+    out2.close()
 
     print(xpos0, xpos1)
 
