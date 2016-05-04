@@ -896,6 +896,17 @@ class FrictionSimulation:
                 print ("Energy calculation took %.3f s, force and stress calculation took %.3f s\n" %
                        (t1-t0, t3-t2))
 
+    def get_positions(self, indices=None):
+        if indices is None:
+            indices = range(len(self.system))
+
+        positions = []
+        for index in indices:
+            pos = self.system[index].get_position()
+            positions.append(pos)
+
+        return positions
+
 
     def write_positions_to_file(self, filename='positions.txt', indices=None, addStepNumber=False):
         """Writes the coordinates of the atoms in a file.
@@ -964,6 +975,19 @@ class FrictionSimulation:
 
         filing = add_number_to_filename(filename, self._get_step(), addStepNumber)
         write_file(filing, output_lines)
+
+    def get_avg_forces(self, indices):
+        """Averige forces of indices
+        """
+        sum_forces = [0, 0, 0]
+        forces = self.system.get_forces(apply_constraint=False)
+        for index in indices:
+            try:
+                f = forces[index]
+            except:
+                f = [0.0, 0.0, 0.0]
+            sum_forces = [sum_forces[i] + f[i] for i in range(0, 3)]
+        return [sum_forces[i] / len(sum_forces) for i in range(0, 3)]
 
     def get_avg_velocity(self, indices):
         """ Average velocity of indices
